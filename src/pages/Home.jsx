@@ -1,5 +1,6 @@
 import MovieCard from "../component/MovieCard";
 import { useState } from "react";
+import "../css/Home.css"
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,8 +13,8 @@ function Home() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    alert(searchQuery);
-    setSearchQuery("------");
+    //alert(searchQuery);
+    setSearchQuery("");
   };
 
   return (
@@ -22,7 +23,7 @@ function Home() {
         <input
           type="text"
           placeholder="Search for movie.."
-          className="Search-input"
+          className="search-input"
           value={searchQuery}
           //automatically updates the page so that when typed it automatically updates the page
           onChange={(e) => setSearchQuery(e.target.value)}

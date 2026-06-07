@@ -1,10 +1,12 @@
+import "../css/MovieCard.css";
+
 function Moviecard({movie}){
 
     function onlike(){
-        alert("click")
+        //alert("click")
     }
-    return  <div className="Movie-card">
-        <div className="Movie-poster">
+    return  <div className="movie-card">
+        <div className="movie-poster">
             <img src={movie.url} alt={movie.title}/>
             <div className="movie-overlay">
             <button className="like-btn" onClick={onlike}>♡  
