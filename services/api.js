@@ -6,3 +6,4 @@ export const getPopularMovies = async () => {
     const data = await response.json()
     return data.results
 };
+//added for push
