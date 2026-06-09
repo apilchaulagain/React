@@ -11,6 +11,7 @@
 }
 
 .movie-poster {
+  position: relative; /* needed so overlay and button position correctly */
   width: 100%;
   aspect-ratio: 2/3;
 }
@@ -19,6 +20,23 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* hidden by default */
+.movie-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: start;
+  justify-content: right;
+}
+
+/* show overlay + button only on card hover */
+.movie-card:hover .movie-overlay {
+  opacity: 1;
 }
 
 .movie-info {
@@ -34,20 +52,24 @@
 }
 
 .favorite-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  align-items: flex-start;
+  border-radius: 30%;
+  border: none;
   background: rgba(0, 0, 0, 0.6);
   color: white;
+  text-align: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+  color: #ff4757;
 }
 
 .favorite-btn.active {
   color: #ff4757;
-}
-
-.user-rating {
-  color: gold;
 }
