@@ -11,7 +11,7 @@ function NavBar(){
             <Link to="/" className="nav-link">
             Home
             </Link>
-            <Link to="/Favorites" className="nav-link">
+            <Link to="/Fav" className="nav-link">
             Favorite
             </Link>
         </div>
