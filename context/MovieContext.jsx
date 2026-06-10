@@ -1,42 +1,39 @@
-import { createContext,useStatem,useContext,useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const MovieContext = createContext()
+const MovieContext = createContext();
 
-export const useMovieContent = () => useContext(MovieContext)
+export const useMovieContext = () => useContext(MovieContext);
 
-export const MovieProvider = ({children}) => {
-    const [favorite, setFavorites] = useState([])
+export const MovieProvider = ({ children }) => {
+  const [favorites, setFavorites] = useState([]);
 
-    useEffect(() => {
-        const storedFavs = localStorage.getItem("favorites")
+  useEffect(() => {
+    const storedFavs = localStorage.getItem("favorites");
+    if (storedFavs) setFavorites(JSON.parse(storedFavs));
+  }, []);
 
-        if (storedFavs) setFavorites(JSON.parse(storedFavs))
-    }, [])
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
-    useEffect(() => {
-        localStorage.setItem('favorites',JSON.stringify(favorites))
-    }, [favorites])
+  const addToFavorites = (movie) => {
+    setFavorites((prev) => [...prev, movie]);
+  };
 
-    const addToFavorites = (movie) => {
-        setFavorites(prev => [...prev,movie])
-    }
+  const removeFromFavorites = (movieID) => {
+    setFavorites((prev) => prev.filter((movie) => movie.id !== movieID));
+  };
 
-    const remoteFromFavorites = (movieID) => {
-        setFavorites (prev => prev.filter(movie => movie.id !== movieId))
-    }
+  const isFavorite = (movieID) => {
+    return favorites.some((movie) => movie.id === movieID);
+  };
 
-    const isFavrite = (movieID) =>{
-        return favorites.some(movie => movie.id --- movieID)
-    }
+  const value = {
+    favorites,
+    addToFavorites,
+    removeFromFavorites,
+    isFavorite,
+  };
 
-    const value = {
-        favorites,
-        addToFavorites,
-        remoteFromFavorites,
-        isFavorite
-    }
-    return <MovieContext.provider>
-        {children}
-    </MovieContext.provider>
-}
-//provides state to any of the component they are wrapped around it
+  return <MovieContext.Provider value={value}>{children}</MovieContext.Provider>;
+};
